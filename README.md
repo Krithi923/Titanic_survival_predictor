@@ -3,7 +3,7 @@
 An end-to-end Machine Learning project that predicts passenger survival probability using a client-side web interface. The underlying predictive engine is powered by a Logistic Regression model trained in Python, which is deployed natively using JavaScript coefficients.
 
 ## 🚀 Live Demo
-You can view the deployed application here: `https://<your-username>.github.io/Titanic_survival_predictor/`
+You can view the deployed application here: `https://Krithi923.github.io/Titanic_survival_predictor/`
 
 ---
 
