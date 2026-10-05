@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Titanic Survival Predictor</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <!-- Animated ocean background -->
+    <div class="ocean-bg">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+    </div>
+
+    <!-- Floating ship decoration -->
+    <div class="ship-decoration">🚢</div>
+
+    <!-- Main container -->
+    <main class="container">
+
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 17l9 4 9-4M5 17V9l7-4 7 4v8"
+                          stroke="#38bdf8" stroke-width="1.8"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h1>Titanic Survival Predictor</h1>
+            </div>
+            <p class="subtitle">
+                Enter passenger details to estimate survival probability —
+                powered by a trained Logistic Regression model.
+            </p>
+        </header>
+
+        <!-- Two-column dashboard layout -->
+        <div class="dashboard">
+
+            <!-- LEFT — Form -->
+            <section class="card form-card">
+                <h2>Passenger Details</h2>
+                <form id="predictorForm">
+
+                    <div class="input-group">
+                        <label for="pclass">
+                            <span class="icon">🎫</span> Passenger Class
+                        </label>
+                        <select id="pclass" required>
+                            <option value="1">1st Class (Upper)</option>
+                            <option value="2">2nd Class (Middle)</option>
+                            <option value="3">3rd Class (Lower)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="sex">
+                            <span class="icon">👤</span> Gender
+                        </label>
+                        <select id="sex" required>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="age">
+                            <span class="icon">🎂</span> Age
+                        </label>
+                        <input type="number" id="age" min="0" max="100"
+                               placeholder="e.g. 29" required>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="sibsp">
+                                <span class="icon">👫</span> Siblings / Spouses
+                            </label>
+                            <input type="number" id="sibsp" min="0" max="10"
+                                   value="0" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="parch">
+                                <span class="icon">👶</span> Parents / Children
+                            </label>
+                            <input type="number" id="parch" min="0" max="10"
+                                   value="0" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn">
+                        <span class="btn-text">Predict Survival</span>
+                        <span class="btn-loader hidden"></span>
+                    </button>
+
+                    <p id="errorMsg" class="error hidden"></p>
+                </form>
+            </section>
+
+            <!-- RIGHT — Result / Info -->
+            <section class="card result-card">
+
+                <!-- Idle state -->
+                <div id="idleState" class="state">
+                    <div class="idle-icon">🧭</div>
+                    <h3>Awaiting Input</h3>
+                    <p>Fill in the passenger details and click
+                        <strong>Predict Survival</strong> to see the result.</p>
+                </div>
+
+                <!-- Loading state -->
+                <div id="loadingState" class="state hidden">
+                    <div class="spinner"></div>
+                    <p>Querying the model…</p>
+                </div>
+
+                <!-- Result state -->
+                <div id="resultState" class="state hidden">
+                    <div id="resultIcon" class="result-icon">✅</div>
+                    <h3 id="resultTitle">Survived</h3>
+                    <p class="prob-label">Survival Probability</p>
+                    <div class="prob-value">
+                        <span id="probNumber">0</span><span class="percent">%</span>
+                    </div>
+
+                    <div class="gauge">
+                        <div id="gaugeFill" class="gauge-fill"></div>
+                    </div>
+
+                    <div class="meta-grid">
+                        <div class="meta-item">
+                            <span class="meta-label">Model</span>
+                            <span class="meta-value">Logistic Regression</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Accuracy</span>
+                            <span class="meta-value">~80%</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">API</span>
+                            <span class="meta-value" id="apiStatus">Checking…</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Dataset</span>
+                            <span class="meta-value">Titanic (891 rows)</span>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2026 Krithi K M · Built with Flask + Scikit-learn + Vanilla JS</p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
